@@ -17,7 +17,6 @@ This project implements an event-driven pipeline in which camera frames are deli
 <p align="center">
   <img src="media/model.jpeg" alt="System Overview" width="750">
 </p>
----
 
 ## Table of Contents
 
@@ -119,7 +118,7 @@ The main realtime software path is:
 ## System Architecture
 
 <p align="center">
-  <img src="diagrams/Threaded Event-Driven System Architecture Diagram" alt="System Architecture" width="900">
+  <img src="diagrams/Threaded Event-Driven System Architecture Diagram.png" alt="System Architecture" width="900">
 </p>
 
 The repository is organised around a staged runtime pipeline.
