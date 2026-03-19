@@ -1,4 +1,3 @@
-````md
 # Realtime Latency Measurement and Evidence
 
 This document presents quantitative evidence for the **software-side latency** of the current Solar Stewart Tracker repository on Raspberry Pi class Linux hardware.
@@ -195,5 +194,5 @@ It does **not**, by itself, prove:
 
 It does provide quantitative evidence that the repository’s **userspace event-driven processing path** is fast, bounded, and suitable for the project’s software control pipeline.
 
-```
-```
+
+

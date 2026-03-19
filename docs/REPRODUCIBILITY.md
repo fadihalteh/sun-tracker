@@ -1,4 +1,3 @@
-````md
 # Reproducibility Guide
 
 This document explains how to reproduce the current repository build, tests, executables, and documentation.
@@ -166,5 +165,3 @@ cmake --build build --config Release
 ctest --test-dir build -C Release --output-on-failure
 ```
 
-```
-```
