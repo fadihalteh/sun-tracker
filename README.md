@@ -18,6 +18,7 @@ This project implements an event-driven pipeline in which camera frames are deli
   <img src="media/model.jpeg" alt="System Overview" width="750">
 </p>
 ---
+
 ## Table of Contents
 
 - [Social Media](#social-media)
