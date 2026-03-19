@@ -577,6 +577,10 @@ The documentation is automatically built and deployed using GitHub Actions on ea
 
 ## Authors and Contributions
 
+### Jichao Wang (3137140W)
+
+Developed the 3RRS inverse kinematics model and core application setup, including configuration, factory creation, and application entry structure. Responsible for translating platform setpoints into actuator-space commands.
+
 ### Fadi Halteh (3127931H)
 
 Designed and implemented the event-driven system architecture, including the SystemManager orchestration, state machine, and thread-safe queue pipeline. Responsible for enforcing realtime design principles such as blocking I/O wake-up behaviour, bounded queues, and overall system integration.
@@ -588,10 +592,6 @@ Developed the vision subsystem and user interface components, including the SunT
 ### Tareq A M Almzanin (3139787A)
 
 Implemented the control layer translating vision estimates into platform motion, including closed-loop control logic and manual override behaviour. Contributed to the definition of shared data types and system-level interaction with the control path.
-
-### Jichao Wang (3137140W)
-
-Developed the 3RRS inverse kinematics model and core application setup, including configuration, factory creation, and application entry structure. Responsible for translating platform setpoints into actuator-space commands.
 
 ### Zhenyu Zhu (3099498Z)
 
