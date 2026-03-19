@@ -18,10 +18,9 @@ This project implements an event-driven pipeline in which camera frames are deli
   <img src="media/model.jpeg" alt="System Overview" width="750">
 </p>
 ---
-
 ## Table of Contents
 
-- [Social Media](#Social Media)
+- [Social Media](#social-media)
 - [Project Overview](#project-overview)
 - [Key Features](#key-features)
 - [System Architecture](#system-architecture)
@@ -42,10 +41,22 @@ This project implements an event-driven pipeline in which camera frames are deli
 - [Future Work](#future-work)
 
 ---
+
 ## Social Media
-📌 TikTok：https://www.tiktok.com/@sunlock.lab_2
-## Project Overview
+
+We actively document the development, testing, and real-time performance of the **Solar Stewart Tracker** to promote transparency, reproducibility, and engagement with the engineering community.
+
+📌 **TikTok (Primary Platform)**  
+https://www.tiktok.com/@sunlock.lab_2
+
+Content includes:
+- realtime tracking demonstrations
+- hardware setup and wiring
+- development progress updates
+- testing and debugging clips
 ---
+
+## Project Overview
 The **Solar Stewart Tracker** is a Linux userspace realtime embedded system that:
 
 - acquires camera frames from a camera backend
