@@ -5,7 +5,7 @@ This document lists the software dependencies that match the current repository 
 
 The project uses **CMake** and **C++17**. Optional features are enabled by dependency detection in `CMakeLists.txt`.
 
-------------------------------------------------------------------------
+---
 
 ## 1) Mandatory requirements
 
