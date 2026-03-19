@@ -118,7 +118,7 @@ The main realtime software path is:
 ## System Architecture
 
 <p align="center">
-  <img src="docs/images/system_architecture.png" alt="System Architecture" width="900">
+  <img src="diagrams/Threaded Event-Driven System Architecture Diagram" alt="System Architecture" width="900">
 </p>
 
 The repository is organised around a staged runtime pipeline.
@@ -240,7 +240,7 @@ sequenceDiagram
 ## Circuit Diagram
 
 <p align="center">
-  <img src="docs/images/circuit_diagram.png" alt="Circuit Diagram" width="900">
+  <img src="diagrams/circuit_diagram.png" alt="Circuit Diagram" width="900">
 </p>
 
 The hardware setup connects:
