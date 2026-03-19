@@ -1,4 +1,3 @@
-````md
 # System Architecture
 
 This document describes the current software architecture of the **Solar Stewart Tracker** repository.
@@ -738,5 +737,3 @@ The architecture is therefore best described as:
 
 **event-driven, queue-based, modular, and multi-threaded**, with optional platform-specific backends and UI layers built around the same core system.
 
-```
-```
