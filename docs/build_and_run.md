@@ -1,4 +1,3 @@
-````md
 # Build and Run
 
 Target platform: **Raspberry Pi OS (Linux)**  
@@ -140,5 +139,4 @@ Run tests:
 ctest --test-dir build -C Release --output-on-failure
 ```
 
-```
-```
+

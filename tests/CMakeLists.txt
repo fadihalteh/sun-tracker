@@ -42,6 +42,7 @@ add_executable(servo_manual_smoketest
 )
 target_include_directories(servo_manual_smoketest PRIVATE include)
 target_link_libraries(servo_manual_smoketest PRIVATE solar_tracker_core)
+solar_enable_coverage(servo_manual_smoketest)
 
 # Real camera hardware integration test (automated when explicitly enabled)
 if(UNIX AND NOT APPLE AND SOLAR_HAVE_LIBCAMERA_FLAG)
