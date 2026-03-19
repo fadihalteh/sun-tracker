@@ -1,4 +1,3 @@
-````md
 # Dependencies
 
 This document lists the software dependencies that match the current repository and build system.
@@ -17,8 +16,7 @@ Check version:
 
 ```bash
 cmake --version
-````
-
+```
 ### 1.2 Compiler
 
 The current build enforces:
