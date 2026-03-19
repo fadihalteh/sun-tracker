@@ -1,10 +1,12 @@
-# Solar Stewart Tracker - "Realtime Solar Tracking with a 3RRS Stewart Platform"
+# Solar Stewart Tracker
 
-![Project Banner](images/project-banner.png)
+<p align="center">
+  <img src="docs/images/system_overview.png" alt="System Overview" width="750">
+</p>
 
-This GitHub repository presents a **real-time embedded C++17 system** for tracking the sun with a **3RRS Stewart-platform-based solar panel mechanism** on **Raspberry Pi / Linux**.
+Real-time embedded C++17 software for solar tracking using a **3-RRS Stewart-type parallel mechanism** on **Raspberry Pi / Linux**.
 
-The system uses an **event-driven pipeline** in which camera frames are delivered through callbacks, processed by vision and control modules, converted into platform commands, and safely applied to three actuators. The architecture is designed to align with the course expectations for **blocking I/O**, **callbacks between classes**, **multi-threading**, **bounded latency**, **SOLID-oriented structure**, and **CMake-based reproducibility**.
+This project implements an event-driven pipeline in which camera frames are delivered through callbacks, processed by vision and control modules, converted into platform motion through inverse kinematics, and safely applied to three actuators through a hardware abstraction layer. The architecture is designed to follow the course expectations for **blocking I/O**, **callback-based communication**, **multi-threaded processing**, **bounded latency**, **modular structure**, and **CMake-based reproducibility**.
 
 ---
 
@@ -14,6 +16,7 @@ The system uses an **event-driven pipeline** in which camera frames are delivere
 - [Key Features](#key-features)
 - [System Architecture](#system-architecture)
 - [Sequence Diagram](#sequence-diagram)
+- [Circuit Diagram](#circuit-diagram)
 - [Repository Structure](#repository-structure)
 - [Bill of Materials](#bill-of-materials)
 - [Dependencies](#dependencies)
@@ -41,7 +44,7 @@ The **Solar Stewart Tracker** is a Linux userspace realtime embedded system that
 - applies safety shaping before actuation
 - drives three servo outputs through a PCA9685 PWM controller
 
-The design goal is not just to “work”, but to do so in a way that is:
+The design goal is not only functional tracking, but tracking implemented in a way that is:
 
 - **event-driven**
 - **responsive**
@@ -92,9 +95,11 @@ The main realtime software path is:
 
 ## System Architecture
 
-![System Architecture](images/system-architecture.png)
+<p align="center">
+  <img src="docs/images/system_architecture.png" alt="System Architecture" width="900">
+</p>
 
-The repository is organised around a staged runtime pipeline:
+The repository is organised around a staged runtime pipeline.
 
 ### Core modules
 
@@ -105,7 +110,7 @@ The repository is organised around a staged runtime pipeline:
   Raspberry Pi / Linux camera backend when `libcamera` is available.
 
 - **SimulatedPublisher**  
-  Fallback/simulation camera backend.
+  Fallback or simulation camera backend.
 
 - **SystemManager**  
   Top-level orchestrator for state, queues, callbacks, and worker threads.
@@ -133,8 +138,8 @@ The repository is organised around a staged runtime pipeline:
 The runtime design uses separate responsibilities with blocking waits:
 
 - **camera/backend context**: frame acquisition and callback delivery
-- **control thread**: vision + control + kinematics
-- **actuator thread**: safety + output application
+- **control thread**: vision, control, and kinematics
+- **actuator thread**: safety filtering and output application
 - **main/event loop**: application lifecycle and optional UI/event handling
 
 ### Queue policy
@@ -207,6 +212,23 @@ sequenceDiagram
         SM->>SM: setState(IDLE)
     end
 ````
+
+---
+
+## Circuit Diagram
+
+<p align="center">
+  <img src="docs/images/circuit_diagram.png" alt="Circuit Diagram" width="900">
+</p>
+
+The hardware setup connects:
+
+* camera through a libcamera-compatible interface
+* PCA9685 PWM driver over I2C
+* three servo motors
+* Raspberry Pi acting as the central controller
+
+The PCA9685 generates stable PWM signals for the servos, while I2C provides communication between the Raspberry Pi and the actuator driver layer.
 
 ---
 
@@ -299,7 +321,7 @@ Solar-Stewart-Tracker/
 ### Optional
 
 * **libcamera**
-  Enables Raspberry Pi camera backend.
+  Enables the Raspberry Pi camera backend.
 
 * **Qt5 Widgets / Charts**
   Enables the optional Qt GUI target.
@@ -392,6 +414,10 @@ Typical Windows location:
 build\Release\solar_tracker.exe
 ```
 
+### Software-only mode
+
+The software-only path uses a simulated camera backend and a non-hardware actuator path for development and testing without the physical platform.
+
 ### Optional Qt GUI application
 
 Built only when Qt5 is found:
@@ -405,6 +431,17 @@ Typical Windows location:
 ```powershell
 build\Release\solar_tracker_qt.exe
 ```
+
+### Hardware mode
+
+Hardware execution requires:
+
+* libcamera support
+* I2C enabled on the host
+* PCA9685 connected correctly
+* servo power and wiring connected correctly
+
+The system will enter **FAULT** if required hardware is unavailable or startup fails.
 
 ### Manual hardware smoke test
 
@@ -457,7 +494,9 @@ The measured software-side userspace pipeline is:
 
 **Camera -> SunTracker -> Controller -> Kinematics3RRS -> ActuatorManager -> ServoDriver**
 
-Measured evidence from the repository documentation shows:
+All measurements are taken using monotonic timestamps recorded inside the software pipeline.
+
+### Latency Results
 
 | Metric      | Average (ms) | Minimum (ms) | Maximum (ms) | Jitter (ms) |
 | ----------- | -----------: | -----------: | -----------: | ----------: |
@@ -471,8 +510,7 @@ Interpretation:
 * average end-to-end software latency is below **1 ms**
 * worst-case measured software latency is below **4 ms**
 * observed jitter is below **4 ms**
-
-These figures apply to the **userspace software path**, not full physical servo motion or total optical-to-mechanical closed-loop response time.
+* measurements represent the **userspace software path only**, not hard real-time guarantees or full mechanical settling time
 
 ---
 
@@ -499,18 +537,21 @@ Project documentation is stored in `docs/` and includes:
 doxygen Doxyfile
 ```
 
-Open:
+Open locally at:
 
 ```text
 docs/html/index.html
 ```
----
 
-Full generated documentation (Doxygen):
+### Online Doxygen documentation
 
-👉 https://fadihalteh.github.io/sun-tracker/
+Full generated documentation is available at:
+
+**[https://fadihalteh.github.io/sun-tracker/](https://fadihalteh.github.io/sun-tracker/)**
 
 The documentation is automatically built and deployed using GitHub Actions on each push.
+
+---
 
 ## Authors and Contributions
 
@@ -534,14 +575,16 @@ Developed the 3RRS inverse kinematics model and core application setup, includin
 
 Implemented the low-level actuator interface including PCA9685 integration and servo control, along with latency measurement instrumentation. Responsible for hardware abstraction and timing analysis across the system pipeline.
 
+Source: project members document.
+
 ---
 
 ## Acknowledgements
 
 We would like to thank:
 
-* **Dr. Bernd Porr**
-* **Dr. Chongfeng Wei**
+* **Dr. Bernd Porr** for guidance in realtime embedded systems and architecture design
+* **Dr. Chongfeng Wei** for software engineering support and project supervision
 * the **University of Glasgow**
 * the laboratory, workshop, and technical support staff involved in supporting the project
 
@@ -567,9 +610,17 @@ Planned or natural next extensions include:
 
 * hardware-validated closed-loop sun tracking on the full physical platform
 * improved camera backend integration on Raspberry Pi
-* stronger manual/GUI operating modes
+* stronger manual and GUI operating modes
 * richer telemetry and live plotting
 * enhanced fault handling and recovery strategies
 * more hardware-backed integration testing
 * more polished project media, demo video, and public-facing documentation
+
+---
+
+## Last Updated
+
+March 2026
+
+```
 
