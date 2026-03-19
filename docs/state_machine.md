@@ -1,27 +1,3 @@
-You’re right.
-For this document, **one Mermaid diagram is not enough**.
-
-A good state-machine doc here should have **3 diagrams**:
-
-1. **overall runtime state graph**
-2. **startup/shutdown path**
-3. **AUTO / MANUAL / FAULT behaviour**
-
-And they must match the code exactly, especially:
-
-* `STARTUP -> NEUTRAL -> SEARCHING`
-* `TRACKING <-> SEARCHING`
-* `enterManual()` only works from running non-fault states
-* `exitManual()` goes to `SEARCHING`
-* `FAULT` does **not** go directly to `IDLE` by reset
-* `FAULT -> STOPPING` only when `stop()` is called
-* `STOPPING -> IDLE`
-* startup “neutral” is actually **startup park command**
-* stop path applies **neutral setpoint** before final driver stop
-
-Below is a **copy-ready corrected version** with **3 Mermaid diagrams** that matches the code.
-
-````md
 # System State Machine
 
 This document defines the runtime behaviour of the Solar Stewart Tracker as a state machine.
@@ -301,5 +277,3 @@ flowchart TD
 * There is no separate `REACQUIRE` state.
 * There is no explicit `FAULT -> IDLE` reset transition inside the current implementation.
 
-```
-```
