@@ -194,32 +194,32 @@ stateDiagram-v2
 
 ```mermaid
 flowchart TD
-    A[start()] --> B[set state STARTUP]
-    B --> C{camera_ valid?}
-    C -- no --> F1[set FAULT and return false]
-    C -- yes --> D{driver_.start()?}
-    D -- no --> F2[set FAULT and return false]
-    D -- yes --> E[reset frame and command queues]
-    E --> G[start control_thread_ and actuator_thread_]
-    G --> H{camera_->start()?}
-    H -- no --> F3[stop queues and join threads]
-    F3 --> F4[driver_.stop()]
-    F4 --> F5[set FAULT and return false]
+    A["start()"] --> B["set state STARTUP"]
+    B --> C{"camera_ valid?"}
+    C -- "no" --> F1["set FAULT and return false"]
+    C -- "yes" --> D{"driver_.start()?"}
+    D -- "no" --> F2["set FAULT and return false"]
+    D -- "yes" --> E["reset frame and command queues"]
+    E --> G["start control_thread_ and actuator_thread_"]
+    G --> H{"camera_->start()?"}
+    H -- "no" --> F3["stop queues and join threads"]
+    F3 --> F4["driver_.stop()"]
+    F4 --> F5["set FAULT and return false"]
 
-    H -- yes --> I[set state NEUTRAL]
-    I --> J[applyParkOnce startup_park_deg_]
-    J --> K[set state SEARCHING]
-    K --> L[start returns true]
+    H -- "yes" --> I["set state NEUTRAL"]
+    I --> J["applyParkOnce startup_park_deg_"]
+    J --> K["set state SEARCHING"]
+    K --> L["start returns true"]
 
-    M[stop()] --> N[set state STOPPING]
-    N --> O[camera_->stop()]
-    O --> P[frame_q_.stop and join control thread]
-    P --> Q[cmd_q_.clear and reset]
-    Q --> R[applyNeutralOnce]
-    R --> S[cmd_q_.stop and join actuator thread]
-    S --> T[driver_.stop]
-    T --> U[latency_.printSummary]
-    U --> V[set state IDLE]
+    M["stop()"] --> N["set state STOPPING"]
+    N --> O["camera_->stop()"]
+    O --> P["frame_q_.stop and join control thread"]
+    P --> Q["cmd_q_.clear and reset"]
+    Q --> R["applyNeutralOnce"]
+    R --> S["cmd_q_.stop and join actuator thread"]
+    S --> T["driver_.stop()"]
+    T --> U["latency_.printSummary()"]
+    U --> V["set state IDLE"]
 ```
 
 ---
