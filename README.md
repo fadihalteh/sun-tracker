@@ -1,17 +1,27 @@
-# Solar Stewart Tracker
+# SunLock Lab Solar Stewart Tracker
 
 <p align="center">
-  <img src="docs/images/system_overview.png" alt="System Overview" width="750">
+  <img src="media/logo.png" alt="System Overview" width="750">
 </p>
 
 Real-time embedded C++17 software for solar tracking using a **3-RRS Stewart-type parallel mechanism** on **Raspberry Pi / Linux**.
 
 This project implements an event-driven pipeline in which camera frames are delivered through callbacks, processed by vision and control modules, converted into platform motion through inverse kinematics, and safely applied to three actuators through a hardware abstraction layer. The architecture is designed to follow the course expectations for **blocking I/O**, **callback-based communication**, **multi-threaded processing**, **bounded latency**, **modular structure**, and **CMake-based reproducibility**.
 
+<p align="center">
+  <img src="media/system_overview.png" alt="System Overview" width="750">
+</p>
+<p align="center">
+  <img src="media/system_section.png" alt="System Overview" width="750">
+</p>
+<p align="center">
+  <img src="media/model.png" alt="System Overview" width="750">
+</p>
 ---
 
 ## Table of Contents
 
+- [Social Media](#Social Media)
 - [Project Overview](#project-overview)
 - [Key Features](#key-features)
 - [System Architecture](#system-architecture)
@@ -32,7 +42,8 @@ This project implements an event-driven pipeline in which camera frames are deli
 - [Future Work](#future-work)
 
 ---
-
+## Social Media
+📌 TikTok：https://www.tiktok.com/@sunlock.lab_2
 ## Project Overview
 
 The **Solar Stewart Tracker** is a Linux userspace realtime embedded system that:
