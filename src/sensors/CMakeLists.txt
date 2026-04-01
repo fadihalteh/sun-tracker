@@ -1,0 +1,23 @@
+if(UNIX AND NOT APPLE)
+    find_package(PkgConfig QUIET)
+    if(PkgConfig_FOUND)
+        pkg_check_modules(LIBCAMERA QUIET libcamera)
+        if(LIBCAMERA_FOUND)
+            target_sources(solar_tracker_core PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/LibcameraPublisher.cpp)
+            target_include_directories(solar_tracker_core PRIVATE ${LIBCAMERA_INCLUDE_DIRS})
+            target_link_libraries(solar_tracker_core PRIVATE ${LIBCAMERA_LIBRARIES})
+            target_compile_options(solar_tracker_core PRIVATE ${LIBCAMERA_CFLAGS_OTHER})
+            set(SOLAR_HAVE_LIBCAMERA_FLAG 1 PARENT_SCOPE)
+            set(SOLAR_HAVE_LIBCAMERA_FLAG 1)
+            message(STATUS "libcamera found -> enabling LibcameraPublisher")
+        else()
+            message(STATUS "libcamera not found -> using SimulatedPublisher / non-libcamera paths")
+        endif()
+    else()
+        message(STATUS "PkgConfig not found -> libcamera support disabled")
+    endif()
+endif()
+
+target_sources(solar_tracker_core PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/SimulatedPublisher.cpp
+)

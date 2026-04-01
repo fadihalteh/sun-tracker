@@ -1,0 +1,22 @@
+if(SOLAR_TRY_OPENCV)
+    find_package(OpenCV QUIET)
+    if(OpenCV_FOUND)
+        message(STATUS "OpenCV found -> enabling UiViewer")
+        target_sources(solar_tracker_core PRIVATE
+            ${CMAKE_CURRENT_SOURCE_DIR}/OverlayDraw.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/UiViewer.cpp
+        )
+        if(DEFINED OpenCV_INCLUDE_DIRS)
+            target_include_directories(solar_tracker_core PRIVATE ${OpenCV_INCLUDE_DIRS})
+        endif()
+        if(DEFINED OpenCV_LIBS)
+            target_link_libraries(solar_tracker_core PRIVATE ${OpenCV_LIBS})
+        elseif(DEFINED OpenCV_LIBRARIES)
+            target_link_libraries(solar_tracker_core PRIVATE ${OpenCV_LIBRARIES})
+        endif()
+        set(SOLAR_HAVE_OPENCV_FLAG 1 PARENT_SCOPE)
+        set(SOLAR_HAVE_OPENCV_FLAG 1)
+    else()
+        message(STATUS "OpenCV not found -> building headless")
+    endif()
+endif()

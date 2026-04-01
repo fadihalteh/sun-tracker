@@ -10,7 +10,7 @@ CREATE_SUBDIRS         = NO
 OUTPUT_LANGUAGE        = English
 USE_MDFILE_AS_MAINPAGE = README.md
 
-INPUT                  = include src docs
+INPUT                  = actuators app common control hal qt sensors system ui vision docs
 RECURSIVE              = YES
 FILE_PATTERNS          = *.hpp *.h *.cpp *.md
 EXCLUDE                = build tests external
